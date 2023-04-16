@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
 
-function App() {
+import Expenses from './Components/expenses/Expenses';
+import NewExpense from './Components/expenses/NewExpenses/NewExpense';
+import "./App.css";
+
+const App = () => {
+
+  const [expenses, setExpenses] = useState([]);
+
+  const addExpenseHandler = (expense) => {
+    setExpenses(prevExpenses => {
+      return [expense, ...prevExpenses];
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    <div className='body'>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
     </div>
+      <p className='head_title'>Veera's Expense Tracker</p>
+      <div>
+        <NewExpense onAddExpense={addExpenseHandler} />
+        <Expenses items={expenses} />
+      </div>
+    </>
   );
-}
 
+}
 export default App;
